@@ -4,61 +4,13 @@ import DashboardHeader from './DashboardHeader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_ROUTES } from '../app_modules/apiRoutes';
+import { formatDistanceToNow } from 'date-fns';
 
-const Container = styled.div`
-  max-width: 1200px;
-  margin: auto;
-  padding: 2rem 1rem;
-  font-family: 'Inter', sans-serif;
-  margin-top: 70px;
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-`;
 
 const Section = styled.div`
   margin-bottom: 2.5rem;
 `;
 
-const Title = styled.h2`
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1.2rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.4rem;
-  }
-`;
-
-const CreditCard = styled.div`
-  background: #f3f4f6;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 0 0 1px #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const CreditInfo = styled.div`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #111827;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 1rem;
-    justify-content: center;
-  }
-`;
 
 
 const CreditProgress = styled.div`
@@ -87,42 +39,6 @@ const TableWrapper = styled.div`
   overflow-x: auto;
 `;
 
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const Th = styled.th`
-  text-align: left;
-  padding: 1rem;
-  background: #f9fafb;
-  color: #374151;
-  font-size: 0.95rem;
-  border-bottom: 1px solid #e5e7eb;
-
-  @media (max-width: 768px) {
-    padding: 0.8rem;
-  }
-`;
-
-const Td = styled.td`
-  padding: 1rem;
-  border-bottom: 1px solid #f3f4f6;
-  font-size: 0.95rem;
-  color: #374151;
-
-  @media (max-width: 768px) {
-    padding: 0.8rem;
-  }
-`;
 
 const Tr = styled.tr`
   &:nth-child(even) {
@@ -130,83 +46,151 @@ const Tr = styled.tr`
   }
 `;
 
-const Status = styled.span`
-  padding: 0.3rem 0.6rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
+
+const Container = styled.div`
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem 1rem 5rem 1rem;
+  font-family: 'Inter', sans-serif;
+  margin-top: 80px;
+  color: #111;
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+`;
+
+const CreditCard = styled.div`
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+`;
+
+const CreditInfo = styled.div`
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+const AddCreditBtn = styled.button`
+  padding: 0.55rem 1.4rem;
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  color: white;
   font-weight: 500;
-  background: ${props => (props.code === 200 ? '#d1fae5' : '#fee2e2')};
-  color: ${props => (props.code === 200 ? '#065f46' : '#991b1b')};
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin-left: 10px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const KeyContainer = styled.div`
   background: #f9fafb;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
   border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 1rem;
   }
 `;
 
 const KeyBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  font-family: 'Courier New', monospace;
   font-size: 1rem;
-  font-weight: 500;
+  color: #334155;
   word-break: break-all;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
+  background: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #e5e7eb;
+  flex: 1;
 `;
 
-const CopyBtn = styled.button`
-  padding: 0.4rem 0.9rem;
+const CopyBtn = styled(AddCreditBtn)`
+  padding: 0.5rem 1.1rem;
   background: #e0e7ff;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.85rem;
   color: #3730a3;
-  cursor: pointer;
-  transition: 0.2s ease;
-
+  font-size: 0.85rem;
+  font-weight: 600;
+  
   &:hover {
     background: #c7d2fe;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
+    transform: scale(1.03);
   }
 `;
 
-const AddCreditBtn = styled.button`
-  padding: 0.5rem 1.2rem;
-  background: #4f46e5;
-  color: white;
+const Table = styled.table`
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+`;
+
+const Th = styled.th`
+  text-align: left;
+  padding: 1rem;
+  background: #f9fafb;
+  color: #334155;
+  font-weight: 600;
   font-size: 0.9rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s ease;
-
-  &:hover {
-    background: #4338ca;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
 
+const Td = styled.td`
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+`;
+
+const Status = styled.span`
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: ${props => (props.code === 200 ? '#ecfdf5' : '#fef2f2')};
+  color: ${props => (props.code === 200 ? '#059669' : '#dc2626')};
+`;
 const DevDashboard = () => {
   const [apiKey, setApiKey] = useState('');
   const [usageData, setUsageData] = useState([]);
@@ -331,7 +315,6 @@ useEffect(() => {
   const handleCopy = () => {
     if (apiKey) {
       navigator.clipboard.writeText(apiKey);
-      alert('API key copied to clipboard!');
     } else {
       alert('No API key to copy!');
     }
@@ -373,12 +356,12 @@ useEffect(() => {
           ) : (
             usageData.map((entry, idx) => (
               <Tr key={idx}>
-                <Td>{entry.timestamp}</Td>
-                <Td>{entry.endpoint}</Td>
+<Td>{formatDistanceToNow(new Date(entry.timestamp), { addSuffix: true })}</Td>
+<Td>{entry.endpoint}</Td>
                 <Td><Status code={entry.status}>{entry.status}</Status></Td>
-                <Td>{entry.cost}</Td>
-                <Td>{entry.response_time}</Td>
-              </Tr>
+                <Td>₹{entry.cost}</Td>
+                <Td>{(entry.response_time / 1000).toFixed(2)} sec</Td>
+                </Tr>
             ))
           )}
         </tbody>
