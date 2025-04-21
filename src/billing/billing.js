@@ -225,7 +225,40 @@ export default function BillingPage() {
       alert("Something went wrong. Try again.");
     }
   };
-
+  useEffect(() => {
+    const validateToken = async () => {
+      const token = localStorage.getItem('token');
+  
+  
+      // If no token, redirect to login
+      if (!token) {
+        console.log('No token found, redirecting to sign-up.');
+        navigate('/sign-up');
+        return;
+      }
+  
+      try {
+        const response = await axios.post(API_ROUTES.userSessionAut, { token });
+  
+        if (!response.data.valid) {
+          console.log('Invalid token, redirecting to sign-up.');
+          navigate('/sign-up');
+        }
+      } catch (error) {
+        console.error('Error during token validation:', error);
+        navigate('/sign-up');
+      }
+    };
+  
+    // Delay the validation by 5 seconds
+    const timeoutId = setTimeout(() => {
+      validateToken();
+    }, 500);
+  
+    // Cleanup timeout on component unmount
+    return () => clearTimeout(timeoutId);
+  }, [navigate]);
+  
   return (
     <PageWrapper>
       {/* Header with Back Button */}
@@ -255,7 +288,6 @@ export default function BillingPage() {
           <TableHead>
             <tr>
               <Th>#</Th>
-              <Th>User ID</Th>
               <Th>Amount (₹)</Th>
               <Th>Payment ID</Th>
               <Th>Order ID</Th>
@@ -267,7 +299,6 @@ export default function BillingPage() {
               logs.map((log, idx) => (
                 <tr key={log.id || idx}>
                   <Td>{idx + 1}</Td>
-                  <Td>{log.user_id}</Td>
                   <Td>{log.amount}</Td>
                   <TdEllipsis>{log.payment_id}</TdEllipsis>
                   <TdEllipsis>{log.order_id}</TdEllipsis>

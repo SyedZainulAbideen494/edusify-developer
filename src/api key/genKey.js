@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { API_ROUTES } from '../app_modules/apiRoutes';
+import axios, { Axios } from 'axios';
 
 const Container = styled.div`
   max-width: 900px;
@@ -184,7 +185,40 @@ const ApiKeyPage = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(apiKey);
   };
-
+  useEffect(() => {
+    const validateToken = async () => {
+      const token = localStorage.getItem('token');
+  
+  
+      // If no token, redirect to login
+      if (!token) {
+        console.log('No token found, redirecting to sign-up.');
+        nav('/sign-up');
+        return;
+      }
+  
+      try {
+        const response = await axios.post(API_ROUTES.userSessionAut, { token });
+  
+        if (!response.data.valid) {
+          console.log('Invalid token, redirecting to sign-up.');
+          nav('/sign-up');
+        }
+      } catch (error) {
+        console.error('Error during token validation:', error);
+        nav('/sign-up');
+      }
+    };
+  
+    // Delay the validation by 5 seconds
+    const timeoutId = setTimeout(() => {
+      validateToken();
+    }, 500);
+  
+    // Cleanup timeout on component unmount
+    return () => clearTimeout(timeoutId);
+  }, [nav]);
+  
   return (
     <Container>
       <Header>
@@ -201,11 +235,6 @@ const ApiKeyPage = () => {
       {action === 'generate' && (
         <GenerateButton onClick={generateApiKey} disabled={isGenerating}>
           {isGenerating ? 'Generating...' : 'Generate API Key'}
-        </GenerateButton>
-      )}
-      {action === 'regenerate' && (
-        <GenerateButton onClick={generateApiKey} disabled={isGenerating}>
-          {isGenerating ? 'Regenerating...' : 'Regenerate API Key'}
         </GenerateButton>
       )}
     </Container>

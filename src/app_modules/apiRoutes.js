@@ -7,4 +7,6 @@ export const API_ROUTES = {
   displayImg: `${API_URL}`,
   userSessionAut: `${API_URL}/api/validate-token-session`,
   sessionCheck: `${API_URL}/api/session-check`,
+  forgotPassword: `${API_URL}/api/auth/forgot-password`,
+  resetPassword: `${API_URL}/api/auth/reset-password`,
 }

@@ -4,13 +4,14 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const links = [
-  {
-    group: 'Get Started',
-    items: [
-      { name: 'Introduction', path: '/document/get-started' },
-      { name: 'API Key', path: '/api-key' },
-      { name: 'Billing', path: '/billing' },
-    ],
+    {
+        group: 'Get Started',
+        items: [
+          { name: 'Introduction', path: '/document/get-started' },
+          { name: 'API Key', path: '/api-key' },
+          { name: 'Billing', path: '/billing' },
+          { name: 'Why Edusify API', path: '/document/why-edusify-api' },
+        ],      
   },
   {
     group: 'Quiz APIs',

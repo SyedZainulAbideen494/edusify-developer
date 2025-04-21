@@ -18,6 +18,7 @@ import ApiKeyDocs from "./Documentation/getStarted";
 import ScrollToTop from "./app_modules/ScrolloTop";
 import ForgotPassword from "./auth/forgot-password";
 import ResetPassword from "./auth/ResetPassword"
+import WhyEdusifyAPI from "./Documentation/WhyEdusifyAPI";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/document/get-started" element={<ApiKeyDocs />} />
+        <Route path="/document/why-edusify-api" element={<WhyEdusifyAPI />} />
         <Route path="/document/api/quiz-topic" element={<QuizApiDocs />} />
         <Route path="/document/api/quiz-exam" element={<QuizApiDocsCompExam />} />
         <Route path="/document/api/pdf-to-quiz" element={<PdfQuizApiDocs />} />
