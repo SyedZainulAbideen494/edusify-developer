@@ -1,157 +1,182 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBarDoc from './NavBarDoc';
+
+// Simulate auth (replace with real check)
+const isAuthenticated = () => {
+  return !!localStorage.getItem('edusifyUser'); // mock check
+};
 
 const Wrapper = styled.div`
   max-width: 900px;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem 3rem;
   font-family: 'Inter', sans-serif;
-  color: #111827;
+  color: #1f2937;
+  margin-top:80px;
 `;
 
 const Title = styled.h1`
-  font-size: 2.75rem;
+  font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 2rem;
-  color: #1f2937;
+  margin-bottom: 2.5rem;
+  color: #111827;
+  letter-spacing: -0.03em;
 `;
 
 const Section = styled.section`
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 `;
 
 const SubTitle = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #1f2937;
+  color: #111827;
 `;
 
 const Paragraph = styled.p`
   font-size: 1.125rem;
   margin-bottom: 1.25rem;
-  line-height: 1.75;
+  line-height: 1.8;
+  color: #374151;
 `;
 
 const List = styled.ul`
   list-style: disc;
   padding-left: 1.5rem;
-  font-size: 1rem;
-  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: #374151;
 `;
 
 const ListItem = styled.li`
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 `;
 
 const StyledLink = styled(Link)`
   color: #6366f1;
   font-weight: 600;
   text-decoration: none;
+  transition: all 0.2s ease;
 
   &:hover {
     text-decoration: underline;
+    opacity: 0.9;
   }
 `;
 
 const Highlight = styled.span`
   background: #f3f4f6;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 0.4rem;
   font-weight: 500;
   font-size: 0.95rem;
 `;
 
+const Notice = styled.div`
+  background-color: #fef3c7;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #facc15;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  color: #92400e;
+`;
+
 const ApiKeyDocs = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      // redirect logic or allow them to read, up to you
+    }
+  }, []);
+
   return (
     <Wrapper>
-        <NavBarDoc/>
-      <Title>Edusify API — Getting Started & Overview</Title>
+      <NavBarDoc />
+
+      {!isAuthenticated() && (
+        <Notice>
+          You need an Edusify account to use our APIs.{' '}
+          <StyledLink to="/sign-up">Create your free account here →</StyledLink> <br />
+          (Edusify App and Developer accounts are the same!)
+        </Notice>
+      )}
+
+      <Title>Edusify API — Getting Started</Title>
+
       <Section>
         <Paragraph>
-          Welcome to the Edusify API ecosystem. Use your API key to access powerful AI tools like quiz generation, flashcard creation, PDF conversion, and more — all tailored for students, educators, and edtech platforms.
+          Build on top of Edusify’s powerful AI infrastructure. From automatic quiz and flashcard generation to full PDF conversion — our API is made for edtechs, student tools, and developers who want to stand out.
         </Paragraph>
       </Section>
 
       <Section>
-        <SubTitle>🚀 What You Can Do with Edusify API</SubTitle>
+        <SubTitle>🚀 What You Can Do</SubTitle>
         <List>
-          <ListItem><strong>PDF to Quiz & Flashcards:</strong> Instantly turn any PDF into a full study set.</ListItem>
-          <ListItem><strong>Plain Text to Quiz or Flashcards:</strong> Paste any text and generate quiz questions or flashcards.</ListItem>
-          <ListItem><strong>Topic to Quiz & Flashcards:</strong> Input any topic (like "Newton’s Laws") and generate everything you need.</ListItem>
+          <ListItem><strong>PDF → Study Kit:</strong> Convert full PDFs into quizzes and flashcards instantly.</ListItem>
+          <ListItem><strong>Text → Smart Tools:</strong> Paste raw text and generate structured study aids.</ListItem>
+          <ListItem><strong>Topic → Resources:</strong> Get quizzes and flashcards on any topic — instantly.</ListItem>
         </List>
       </Section>
 
       <Section>
-        <SubTitle>🧠 Where You Need an API Key</SubTitle>
+        <SubTitle>🔑 Where API Keys Are Needed</SubTitle>
         <Paragraph>
-          Your API key is required whenever you make a request to Edusify's developer tools. It uniquely identifies you, tracks your credit usage, and allows access to premium AI services.
+          Your unique API key authenticates you, tracks your usage, and gives access to premium features.
         </Paragraph>
         <Paragraph>
-          To generate your API key, go to the <StyledLink to="/api-key">API Key Page</StyledLink>. Keep it secret, keep it safe.
-        </Paragraph>
-      </Section>
-
-      <Section>
-        <SubTitle>💳 Managing Billing & Credits</SubTitle>
-        <Paragraph>
-          Edusify uses a simple pay-per-call credit model. No subscriptions, no hidden fees. Just buy credits and use them however you want.
-        </Paragraph>
-        <Paragraph>
-          Head to the <StyledLink to="/billing">Billing Page</StyledLink> to top up your credits. The minimum is ₹50, and all your transactions will be logged for transparency.
+          Generate your key on the <StyledLink to="/api-key">API Key Page</StyledLink>. Never share it publicly.
         </Paragraph>
       </Section>
 
       <Section>
-        <SubTitle>📦 Quickstart Guide</SubTitle>
+        <SubTitle>💳 Billing & Credits</SubTitle>
+        <Paragraph>
+          Edusify follows a pay-as-you-go model — no subscriptions, just pure flexibility.
+        </Paragraph>
+        <Paragraph>
+          Add credits (₹50 minimum) from the <StyledLink to="/billing">Billing Page</StyledLink>. All charges are transparently logged.
+        </Paragraph>
+      </Section>
+
+      <Section>
+        <SubTitle>📦 Quickstart</SubTitle>
         <List>
-          <ListItem><strong>Step 1:</strong> Visit the <StyledLink to="/api-key">API Key Page</StyledLink> and generate your key.</ListItem>
-          <ListItem><strong>Step 2:</strong> Go to the <StyledLink to="/billing">Billing Page</StyledLink> and add credits (₹50 minimum).</ListItem>
-          <ListItem><strong>Step 3:</strong> Start using the APIs — pass your key in each request body.</ListItem>
-          <ListItem><strong>Step 4:</strong> Track your usage and manage billing easily from your dashboard.</ListItem>
+          <ListItem><strong>1.</strong> Generate your API key.</ListItem>
+          <ListItem><strong>2.</strong> Add credits to unlock the endpoints.</ListItem>
+          <ListItem><strong>3.</strong> Start sending requests. Simple.</ListItem>
         </List>
       </Section>
 
       <Section>
-        <SubTitle>🔒 API Key Tips</SubTitle>
+        <SubTitle>🔒 Pro Tips</SubTitle>
         <List>
-          <ListItem>Never share your API key publicly (e.g., GitHub, frontend code).</ListItem>
-          <ListItem>Rotate keys regularly if building large-scale integrations.</ListItem>
-          <ListItem>Use a backend proxy to protect your key in public apps.</ListItem>
+          <ListItem>Never expose your key in client-side code.</ListItem>
+          <ListItem>Rotate keys regularly if you're scaling up.</ListItem>
+          <ListItem>Use backend proxies for key safety in public apps.</ListItem>
         </List>
       </Section>
+
       <Section>
-        <SubTitle>📚 API Documentation Links</SubTitle>
+        <SubTitle>📚 API Endpoint Docs</SubTitle>
         <List>
-          <ListItem>
-            <StyledLink to="/document/api/quiz-topic">Quiz from Topic</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/quiz-exam">Quiz from Competitive Exam</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/pdf-to-quiz">PDF to Quiz</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/pdf-to-flashcard">PDF to Flashcards</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/quiz-from-text">Text to Quiz</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/flashcards-from-topic">Topic to Flashcards</StyledLink>
-          </ListItem>
-          <ListItem>
-            <StyledLink to="/document/api/flashcards-from-text">Text to Flashcards</StyledLink>
-          </ListItem>
+          <ListItem><StyledLink to="/document/api/quiz-topic">Quiz from Topic</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/quiz-exam">Quiz from Competitive Exam</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/pdf-to-quiz">PDF to Quiz</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/pdf-to-flashcard">PDF to Flashcards</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/quiz-from-text">Text to Quiz</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/flashcards-from-topic">Topic to Flashcards</StyledLink></ListItem>
+          <ListItem><StyledLink to="/document/api/flashcards-from-text">Text to Flashcards</StyledLink></ListItem>
         </List>
       </Section>
+
       <Section>
-        <SubTitle>Need Help?</SubTitle>
+        <SubTitle>🤝 Need Help?</SubTitle>
         <Paragraph>
-          Our team is here for you. Email us at <Highlight>edusyfy@gmail.com</Highlight> or join the developer Discord for help, ideas, or collaboration.
+          We’ve got you. Email <Highlight>edusyfy@gmail.com</Highlight> or join our dev Discord for assistance, ideas, or just to vibe with the team.
         </Paragraph>
       </Section>
     </Wrapper>
