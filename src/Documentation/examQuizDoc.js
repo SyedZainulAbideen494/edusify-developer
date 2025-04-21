@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import NavBarDoc from './NavBarDoc';
 
 const Wrapper = styled.div`
   max-width: 900px;
@@ -99,7 +100,8 @@ const StyledLink = styled(Link)`
 `;
 const QuizApiDocsCompExam = () => {
   return (
-    <Wrapper>
+    <Wrapper>\
+      <NavBarDoc/>
       <Title>Edusify API — Generate Quiz from Exam</Title>
 
       <Paragraph>

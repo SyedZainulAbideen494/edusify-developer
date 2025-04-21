@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import NavBarDoc from './NavBarDoc';
 
 const Wrapper = styled.div`
   max-width: 900px;
@@ -66,8 +67,8 @@ const Highlight = styled.span`
 const ApiKeyDocs = () => {
   return (
     <Wrapper>
+        <NavBarDoc/>
       <Title>Edusify API — Getting Started & Overview</Title>
-
       <Section>
         <Paragraph>
           Welcome to the Edusify API ecosystem. Use your API key to access powerful AI tools like quiz generation, flashcard creation, PDF conversion, and more — all tailored for students, educators, and edtech platforms.

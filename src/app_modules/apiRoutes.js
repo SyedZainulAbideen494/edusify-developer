@@ -5,4 +5,6 @@ export const API_ROUTES = {
   login: `${API_URL}/login`,
   signup: `${API_URL}/signup`,
   displayImg: `${API_URL}`,
+  userSessionAut: `${API_URL}/api/validate-token-session`,
+  sessionCheck: `${API_URL}/api/session-check`,
 }
