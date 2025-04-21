@@ -309,7 +309,7 @@ const checkTokenAndRedirect = async (token) => {
                 aria-label="Accept Terms and Conditions"
             />
             <label htmlFor="terms" className="signup-sign-up-page-checkbox-label">
-                I agree to the <Link to="/terms" className="signup-sign-up-page-link" style={{ color: 'white' }}>Terms and Conditions</Link>
+                I agree to the <Link to="/terms" className="signup-sign-up-page-link" style={{ color: 'black' }}>Terms and Conditions</Link>
             </label>
         </div>
     </>
@@ -327,10 +327,10 @@ const checkTokenAndRedirect = async (token) => {
                 </button>
             )}
         </form>
-        <p style={{ textAlign: 'center', fontSize: '14px', color: 'white', marginTop: '20px' }}>
+        <p style={{ textAlign: 'center', fontSize: '14px', color: 'black', marginTop: '20px' }}>
             Already have an account?
             <span style={{ fontWeight: 'bold', color: 'white' }}>
-                <Link to='/login' style={{color: 'white'}}> Login</Link>
+                <Link to='/login' style={{color: 'black'}}> Login</Link>
             </span>
         </p>
     </div>

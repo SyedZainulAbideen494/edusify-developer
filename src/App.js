@@ -16,6 +16,8 @@ import ApiKeyPage from "./api key/genKey";
 import BillingPage from "./billing/billing";
 import ApiKeyDocs from "./Documentation/getStarted";
 import ScrollToTop from "./app_modules/ScrolloTop";
+import ForgotPassword from "./auth/forgot-password";
+import ResetPassword from "./auth/ResetPassword"
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path="/document/api/flashcards-from-text" element={<FlashcardsFromTextDocs />} />
         <Route path="/api-key" element={<ApiKeyPage />} />
         <Route path="/billing" element={<BillingPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<DashboardPage />} />
       </Routes>
     </Router>

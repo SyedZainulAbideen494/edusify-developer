@@ -4,23 +4,21 @@
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background: linear-gradient(135deg, #0d0d0d, #1a1a1a); /* Dark gradient background */
+  background: linear-gradient(135deg, #f0f4ff, #ffffff); /* Light gradient background */
 }
 
 /* Card styles */
 .signup-sign-up-page-card {
-  background: rgba(30, 30, 30, 0.85); /* Glassy dark background */
+  background: rgba(255, 255, 255, 0.75); /* Glassy light background */
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(20px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 450px;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-
 
 /* Heading */
 .signup-sign-up-page-heading {
@@ -39,13 +37,13 @@
   margin-bottom: 40px;
   margin-top: 20px;
   text-align: center;
-  color: #f1f1f1;
+  color: #333;
 }
 
 /* Subtext */
 .signup-sign-up-page-subtext {
   font-size: 14px;
-  color: #aaa;
+  color: #666;
   text-align: center;
   margin-bottom: 25px;
 }
@@ -58,19 +56,6 @@
   align-items: center;
 }
 
-.signup-sign-up-page-input-group:before {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 10px;
-  height: 2px;
-  width: 100%;
-  transition: background-color 0.3s ease;
-}
-
-
-
-/* Input icons */
 .signup-sign-up-page-icon {
   position: absolute;
   left: 10px;
@@ -83,10 +68,10 @@
 .signup-sign-up-page-input {
   width: 100%;
   padding: 10px 10px 10px 40px;
-  border: 1px solid #444;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #1f1f1f;
-  color: #f1f1f1;
+  background-color: #fff;
+  color: #333;
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -94,10 +79,9 @@
 
 .signup-sign-up-page-input:focus {
   border-color: #007aff;
-  box-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
 }
 
-/* Toggle password visibility */
 .signup-sign-up-page-toggle-password {
   position: absolute;
   right: 10px;
@@ -114,11 +98,11 @@
 }
 
 .signup-sign-up-page-status-icon.available {
-  color: #00e676;
+  color: #00c853;
 }
 
 .signup-sign-up-page-status-icon.taken {
-  color: #ef5350;
+  color: #d32f2f;
 }
 
 /* Checkbox */
@@ -130,7 +114,7 @@
 
 .signup-sign-up-page-checkbox-label {
   font-size: 14px;
-  color: #ccc;
+  color: #444;
   margin-left: 8px;
 }
 
@@ -138,12 +122,12 @@
 .signup-sign-up-page-suggestions {
   margin-top: 10px;
   font-size: 14px;
-  color: #bbb;
+  color: #555;
 }
 
 .signup-sign-up-page-suggestion {
-  background-color: #333;
-  color: #66b2ff;
+  background-color: #f1f1f1;
+  color: #007aff;
   border-radius: 5px;
   padding: 5px;
   margin-right: 5px;
@@ -151,12 +135,12 @@
 }
 
 .signup-sign-up-page-suggestion:hover {
-  background-color: #444;
+  background-color: #e0e0e0;
 }
 
 /* Error message */
 .signup-sign-up-page-error {
-  color: #ff5252;
+  color: #e53935;
   margin-bottom: 10px;
   font-size: 14px;
 }
@@ -197,7 +181,7 @@
   left: 20px;
   background-color: transparent;
   border: none;
-  color: #aaa;
+  color: #555;
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -228,7 +212,7 @@
   font-size: 1rem;
   margin-bottom: 15px;
   animation: fadeIn 0.5s;
-  color: #aaa;
+  color: #555;
 }
 
 .signup-sign-up-page-benefits li svg {
@@ -248,7 +232,6 @@
   }
 }
 
-/* Hover effect for benefits */
 .signup-sign-up-page-benefits li:hover {
   transform: scale(1.02);
   transition: transform 0.2s ease;
@@ -258,20 +241,16 @@
 .signup-sign-up-page-username-prefix {
   position: absolute;
   left: 10px;
-  color: #aaa;
+  color: #999;
   font-size: 16px;
-}
-
-.signup-sign-up-page-input {
-  padding-left: 30px;
 }
 
 /* Disabled button */
 .signup-sign-up-page-submit-button:disabled {
-  background-color: #333;
+  background-color: #ccc;
   color: #777;
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 /* Mobile */
