@@ -45,7 +45,7 @@ const NavbarWrapper = styled.nav`
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 92%;
+  width: 80%;
   max-width: 1100px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
