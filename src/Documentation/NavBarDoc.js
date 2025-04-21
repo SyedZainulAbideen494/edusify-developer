@@ -32,8 +32,7 @@ const links = [
   {
     group: 'More',
     items: [
-      { name: 'Changelog', path: '/changelog' },
-      { name: 'Contact', path: '/contact' },
+      { name: 'Dashboard', path: '/' },
     ],
   },
 ];
