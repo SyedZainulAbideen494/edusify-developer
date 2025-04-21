@@ -75,36 +75,29 @@ const Burger = styled.div`
 `;
 
 const Dropdown = styled.div`
-  position: absolute;
-  top: calc(100% + 14px);
-  right: 2rem;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(14px);
+ position: absolute;
+  top: calc(100% + 10px);
+  right: 1.5rem;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(16px);
   border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  padding: ${({ open }) => (open ? '1.2rem 1.5rem' : '0')};
-  max-height: ${({ open }) => (open ? '320px' : '0')};
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  padding: ${({ open }) => (open ? '1rem 1.25rem' : '0')};
+  max-height: ${({ open }) => (open ? '350px' : '0')};
   overflow-y: ${({ open }) => (open ? 'auto' : 'hidden')};
   overflow-x: hidden;
-  width: 250px;
+  width: 260px;
   transition: all 0.3s ease;
   border: 1px solid rgba(0, 0, 0, 0.05);
-
-  /* Custom Scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  pointer-events: ${({ open }) => (open ? 'all' : 'none')};
 
   &::-webkit-scrollbar {
     width: 6px;
   }
-
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
   }
 `;
 
@@ -121,7 +114,7 @@ const GroupTitle = styled.h4`
 const DropdownLink = styled.div`
   padding: 6px 0 6px 10px;
   font-size: 0.93rem;
-  color: #1a1a1a;
+  color:rgb(255, 255, 255);
   cursor: pointer;
   border-radius: 6px;
   transition: 0.2s ease;
