@@ -25,21 +25,6 @@ function App() {
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/document/get-started" element={<ApiKeyDocs />} />
-        <Route path="/document/why-edusify-api" element={<WhyEdusifyAPI />} />
-        <Route path="/document/api/quiz-topic" element={<QuizApiDocs />} />
-        <Route path="/document/api/quiz-exam" element={<QuizApiDocsCompExam />} />
-        <Route path="/document/api/pdf-to-quiz" element={<PdfQuizApiDocs />} />
-        <Route path="/document/api/pdf-to-flashcard" element={<FlashcardApiDocs />} />
-        <Route path="/document/api/quiz-from-text" element={<QuizFromTextDocs />} />
-        <Route path="/document/api/flashcards-from-topic" element={<FlashcardsApiDocs />} />
-        <Route path="/document/api/flashcards-from-text" element={<FlashcardsFromTextDocs />} />
-        <Route path="/api-key" element={<ApiKeyPage />} />
-        <Route path="/billing" element={<BillingPage />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<DashboardPage />} />
       </Routes>
     </Router>
