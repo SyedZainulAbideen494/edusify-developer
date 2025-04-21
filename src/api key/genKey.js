@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { API_ROUTES } from '../app_modules/apiRoutes';
 
 const Container = styled.div`
   max-width: 900px;
@@ -138,7 +139,7 @@ const ApiKeyPage = () => {
     const token = localStorage.getItem('token');
 
     // Check if the API key exists by calling the backend
-    fetch('http://localhost:8080/check-api-key', {
+    fetch(`${API_ROUTES.baseURL}/check-api-key`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -161,7 +162,7 @@ const ApiKeyPage = () => {
     setIsGenerating(true);
     const token = localStorage.getItem('token');
 
-    fetch('http://localhost:8080/generate-api-key', {
+    fetch(`${API_ROUTES.baseURL}/generate-api-key`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

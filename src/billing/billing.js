@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { API_ROUTES } from "../app_modules/apiRoutes";
 
 // Styled Components
 const PageWrapper = styled.div`
@@ -160,7 +161,7 @@ export default function BillingPage() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const { data } = await axios.post("http://localhost:8080/get-billing-logs", { token });
+      const { data } = await axios.post(`${API_ROUTES.baseURL}/get-billing-logs`, { token });
 
       if (Array.isArray(data.logs)) {
         setLogs(data.logs);
@@ -192,7 +193,7 @@ export default function BillingPage() {
       const token = localStorage.getItem("token");
       if (!token) return alert("Please log in first.");
 
-      const { data } = await axios.post("http://localhost:8080/create-order/api", {
+      const { data } = await axios.post(`${API_ROUTES.baseURL}/create-order/api`, {
         amount: amt,
         token,
       });
@@ -204,7 +205,7 @@ export default function BillingPage() {
         name: "Edusify API Billing",
         order_id: data.order.id,
         handler: async function (response) {
-          await axios.post("http://localhost:8080/verify-order/api", {
+          await axios.post(`${API_ROUTES.baseURL}/verify-order/api`, {
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
             signature: response.razorpay_signature,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import DashboardHeader from './DashboardHeader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_ROUTES } from '../app_modules/apiRoutes';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -217,7 +218,7 @@ const DevDashboard = () => {
 
     if (token) {
       // Call the backend API to fetch usage logs
-      fetch('http://localhost:8080/api/get-usage-logs', {
+      fetch(`${API_ROUTES.baseURL}/api/get-usage-logs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -250,7 +251,7 @@ const DevDashboard = () => {
       }
   
       try {
-        const response = await axios.post('http://localhost:8080/get-credit', {
+        const response = await axios.post(`${API_ROUTES.baseURL}/get-credit`, {
           token, // send token in the request body
         });
   
@@ -272,7 +273,7 @@ const DevDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
   
-    fetch('http://localhost:8080/get-api-key', {
+    fetch(`${API_ROUTES.baseURL}/get-api-key`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
