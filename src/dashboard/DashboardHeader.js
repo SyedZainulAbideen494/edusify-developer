@@ -147,7 +147,6 @@ const DashboardHeader = () => {
         <Link to='/billing'>
         <Button>Billing</Button>
         </Link>
-        <ProfileIcon />
       </ButtonGroup>
 
       <MobileMenuIcon onClick={() => setMenuOpen(!menuOpen)} />
@@ -162,9 +161,6 @@ const DashboardHeader = () => {
           <Link to='/billing'>
           <Button style={{ width: '100%' }}>Billing</Button>
           </Link>
-          <ProfileWrapper>
-            <ProfileIcon />
-          </ProfileWrapper>
         </Dropdown>
       )}
     </Header>
